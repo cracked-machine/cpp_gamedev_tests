@@ -10,6 +10,13 @@
                 "cd sdl3;",
                 "cmake -S . -B build;",
                 "cmake --build build"
+            ]            
+        },
+        {
+            "label": "Build SFML",
+            "type": "shell",
+            "command": [
+                "./sfml3/build.sh"
             ]
         }
     ]
