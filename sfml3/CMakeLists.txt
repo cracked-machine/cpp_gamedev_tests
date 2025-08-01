@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 3.28)
 project(CMakeSFMLProject LANGUAGES CXX)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 include(FetchContent)
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG 3.0.1
-    GIT_SHALLOW ON
-    EXCLUDE_FROM_ALL
-    SYSTEM)
-FetchContent_MakeAvailable(SFML)
+    GIT_SHALLOW ON EXCLUDE_FROM_ALL SYSTEM) 
+
+FetchContent_Declare(SPDLog
+    GIT_REPOSITORY https://github.com/gabime/spdlog.git
+    GIT_TAG 6fa36017cfd5731d617e1a934f0e5ea9c4445b13    #v1.15.3
+    GIT_SHALLOW ON EXCLUDE_FROM_ALL SYSTEM)
+
+FetchContent_MakeAvailable(SFML SPDLog)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
