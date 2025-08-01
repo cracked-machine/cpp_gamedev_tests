@@ -17,11 +17,12 @@
                 "clangd.arguments": [
                     "-background-index",
                     "-compile-commands-dir=sfml3/build"
-                ]
+                ],
+                "C_Cpp.intelliSenseEngine": "disabled"
             }
         }
     },
     "remoteUser": "user",
-    "containerUser": "user",
+    "containerUser": "user"
     
 }

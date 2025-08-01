@@ -12,7 +12,16 @@ FetchContent_Declare(SPDLog
     GIT_TAG 6fa36017cfd5731d617e1a934f0e5ea9c4445b13    #v1.15.3
     GIT_SHALLOW ON EXCLUDE_FROM_ALL SYSTEM)
 
-FetchContent_MakeAvailable(SFML SPDLog)
+FetchContent_Declare(Quill
+    GIT_REPOSITORY https://github.com/odygrd/quill.git
+    GIT_TAG a29940ebe1122556fa6d99be1929264469d6ec99    #v10.0.1
+    EXCLUDE_FROM_ALL SYSTEM
+)
+
+FetchContent_MakeAvailable(
+    SFML 
+    SPDLog
+)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -58,7 +67,11 @@ file(COPY       ${CMAKE_SOURCE_DIR}/src/examples/keyboard/resources/error_005.og
 set(TARGET sprite_test)
 add_executable(${TARGET} ${CMAKE_SOURCE_DIR}/src/${TARGET}.cpp)
 target_compile_features(${TARGET} PRIVATE cxx_std_17)
-target_link_libraries(${TARGET} PRIVATE SFML::Graphics SFML::Audio spdlog::spdlog)
+target_link_libraries(${TARGET} PRIVATE 
+    SFML::Graphics 
+    SFML::Audio 
+    spdlog::spdlog
+)
 target_include_directories(${TARGET} SYSTEM PRIVATE 
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/src/examples/include
