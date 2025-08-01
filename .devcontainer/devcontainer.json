@@ -16,7 +16,7 @@
             "settings": {
                 "clangd.arguments": [
                     "-background-index",
-                    "-compile-commands-dir=build"
+                    "-compile-commands-dir=sfml3/build"
                 ]
             }
         }
