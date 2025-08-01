@@ -1,18 +1,14 @@
 #include <SFML/Graphics.hpp>    
 // #include <logger.hpp>
-#include <iostream>
-#include <logger.hpp>
-#include <spdlog/logger.h>
-#include <spdlog/sinks/basic_file_sink.h>
-#include <spdlog/sinks/callback_sink.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
-
+#include <async_log_controller.hpp>
+#include <filesystem>
 #include <memory>
-#include <spdlog/spdlog.h>
+
 
 int main()
 {
-    std::unique_ptr<Test::SFML3::Logger> theLog{std::make_unique<Test::SFML3::Logger>()};
+    // std::unique_ptr<Test::SFML3::Logger> theLog{std::make_unique<Test::SFML3::Logger>()};
+    std::unique_ptr<Test::Sprite::AsyncLogController> logController {std::make_unique<Test::Sprite::AsyncLogController>()};
 
     spdlog::info("some info log");
     spdlog::error("critical issue"); // will notify you
@@ -22,10 +18,11 @@ int main()
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(144);
     
+    std::filesystem::path imagePath{"resources\\background.jpg"};
     sf::Texture texture;
-    try { texture = sf::Texture("resources\\background.jpg"); }
+    try { texture = sf::Texture(imagePath); }
     catch(const std::exception& e) { 
-        // spdlog::critical("{}", e.what());
+        spdlog::critical("{}: {}" , e.what(), imagePath.string());
     }
 
     sf::Sprite sprite(texture);

@@ -13,25 +13,15 @@ class Logger {
 public:
     Logger()
     {
-
         m_console_sink->set_level(spdlog::level::trace);
         m_console_sink->set_pattern("[" + m_log_name + "] [%^%l%$] %v");
 
         m_file_sink->set_level(spdlog::level::trace);
         m_file_sink->set_pattern("["+ m_log_name +"] [%^%l%$] %v");    
 
-        // m_callback_sink = std::make_shared<spdlog::sinks::callback_sink_mt>(
-        //     [](const spdlog::details::log_msg &msg) {
-        //         std::cout << "Callback!!!" << "\n";
-        //     }
-        // );
-
         spdlog::set_default_logger(m_logger);
         spdlog::flush_on(spdlog::level::trace); 
-
     }
-
-
 private:
     std::string m_log_path{ "logs/log.txt" };
     std::string m_log_name{ "sprite_test" };
