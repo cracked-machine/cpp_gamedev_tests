@@ -12,6 +12,8 @@ int main()
 
     spdlog::info("some info log");
     spdlog::error("critical issue"); // will notify you
+    spdlog::critical("critical issue"); // will notify you
+    spdlog::critical("critical issue"); // will notify you           
 
     // spdlog::info("main");
     
@@ -39,6 +41,7 @@ int main()
 
         window.clear();
         window.draw(sprite);
+        spdlog::info("draw");
         window.display();
     }
 }

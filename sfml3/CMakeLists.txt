@@ -25,60 +25,26 @@ FetchContent_MakeAvailable(
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# add_executable(main src/main.cpp)
-# target_compile_features(main PRIVATE cxx_std_17)
-# target_link_libraries(main PRIVATE SFML::Graphics)
+add_subdirectory( ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/window )
+target_include_directories( window PRIVATE ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/include )
 
-set(TARGET window)
-add_executable(${TARGET} ${CMAKE_SOURCE_DIR}/src/examples/window/Window.cpp)
-target_compile_features(${TARGET} PRIVATE cxx_std_17)
-target_link_libraries(${TARGET} PRIVATE SFML::Graphics SFML::Window)
-target_include_directories(${TARGET} SYSTEM PRIVATE ${PROJECT_SOURCE_DIR}/src/examples/include)
+add_subdirectory( ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/opengl )
+target_include_directories( opengl PRIVATE ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/include )
+file(COPY ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/opengl/resources DESTINATION ${CMAKE_BINARY_DIR}/bin )
 
-set(TARGET opengl)
-add_executable(${TARGET} ${CMAKE_SOURCE_DIR}/src/examples/opengl/OpenGL.cpp)
-target_compile_features(${TARGET} PRIVATE cxx_std_17)
-target_link_libraries(${TARGET} PRIVATE SFML::Graphics SFML::Audio)
-target_include_directories(${TARGET} SYSTEM PRIVATE ${PROJECT_SOURCE_DIR}/src/examples/include)
-file(COPY       ${CMAKE_SOURCE_DIR}/src/examples/opengl/resources/background.jpg
-                ${CMAKE_SOURCE_DIR}/src/examples/opengl/resources/logo.png
-                ${CMAKE_SOURCE_DIR}/src/examples/opengl/resources/tuffy.ttf
-    DESTINATION ${CMAKE_BINARY_DIR}/bin/resources)
+add_subdirectory( ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/event_handling )
+file(COPY ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/event_handling/resources DESTINATION ${CMAKE_BINARY_DIR}/bin )
 
-set(TARGET events)
-add_executable(${TARGET} ${CMAKE_SOURCE_DIR}/src/examples/event_handling/EventHandling.cpp)
-target_compile_features(${TARGET} PRIVATE cxx_std_17)
-target_link_libraries(${TARGET} PRIVATE SFML::Graphics)
-target_include_directories(${TARGET} SYSTEM PRIVATE ${PROJECT_SOURCE_DIR}/src/examples/include)
-file(COPY       ${CMAKE_SOURCE_DIR}/src/examples/event_handling/resources/tuffy.ttf
-    DESTINATION ${CMAKE_BINARY_DIR}/bin/resources)
+add_subdirectory( ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/keyboard )
+file(COPY ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/keyboard/resources DESTINATION ${CMAKE_BINARY_DIR}/bin )
 
-set(TARGET keyboard)
-add_executable(${TARGET} ${CMAKE_SOURCE_DIR}/src/examples/keyboard/Keyboard.cpp)
-target_compile_features(${TARGET} PRIVATE cxx_std_17)
-target_link_libraries(${TARGET} PRIVATE SFML::Graphics SFML::Audio)
-target_include_directories(${TARGET} SYSTEM PRIVATE ${PROJECT_SOURCE_DIR}/src/examples/include)
-file(COPY       ${CMAKE_SOURCE_DIR}/src/examples/keyboard/resources/error_005.ogg
-                ${CMAKE_SOURCE_DIR}/src/examples/keyboard/resources/mouseclick1.ogg
-                ${CMAKE_SOURCE_DIR}/src/examples/keyboard/resources/mouserelease1.ogg
-                ${CMAKE_SOURCE_DIR}/src/examples/keyboard/resources/Tuffy.ttf
-    DESTINATION ${CMAKE_BINARY_DIR}/bin/resources)
     
-set(TARGET sprite_test)
-add_executable(${TARGET} ${CMAKE_SOURCE_DIR}/src/${TARGET}.cpp)
-target_compile_features(${TARGET} PRIVATE cxx_std_17)
-target_link_libraries(${TARGET} PRIVATE 
-    SFML::Graphics 
-    SFML::Audio 
-    spdlog::spdlog
-)
-target_include_directories(${TARGET} SYSTEM PRIVATE 
-    ${PROJECT_SOURCE_DIR}/src
-    ${PROJECT_SOURCE_DIR}/src/examples/include
-)
+add_subdirectory( ${CMAKE_SOURCE_DIR}/src/sprite_test )
+
+add_subdirectory( ${CMAKE_SOURCE_DIR}/src/vertexarray_test )
 
 # runtime deps for mingw
-file(COPY       /usr/lib/gcc/x86_64-w64-mingw32/14-win32/libstdc++-6.dll build/bin/libstdc++-6.dll
-                /usr/lib/gcc/x86_64-w64-mingw32/14-win32/libgcc_s_seh-1.dll build/bin/libgcc_s_seh-1.dll
-    DESTINATION ${CMAKE_BINARY_DIR}/bin/)
+file(   COPY        /usr/lib/gcc/x86_64-w64-mingw32/14-win32/libstdc++-6.dll build/bin/libstdc++-6.dll
+                    /usr/lib/gcc/x86_64-w64-mingw32/14-win32/libgcc_s_seh-1.dll build/bin/libgcc_s_seh-1.dll
+        DESTINATION ${CMAKE_BINARY_DIR}/bin/ )
 
