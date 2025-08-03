@@ -19,8 +19,8 @@
     "type": "cppdbg",
     "request": "launch",
     // samba network share path to project and binary 
-    "cwd": "X:\\cpp\\cpp_gamedev_tests\\sfml3",
-    "program": "X:\\cpp\\cpp_gamedev_tests\\sfml3\\build\\bin\\sprite_test.exe",
+    "cwd": "X:\\cpp\\cpp_gamedev_tests\\sfml3\\build\\bin",
+    "program": "X:\\cpp\\cpp_gamedev_tests\\sfml3\\build\\bin\\celestial_bodies.exe",
     "MIMode": "gdb",
     // local target (windows) install of gdb (w64devkit/msys)
     "miDebuggerPath": "C:\\msys64\\mingw64\\bin\\gdb.exe",

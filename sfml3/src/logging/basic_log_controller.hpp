@@ -1,5 +1,5 @@
-#ifndef __TEST_SFML3_LOGGER_HPP__
-#define __TEST_SFML3_LOGGER_HPP__
+#ifndef __TEST_LOGGING_BASICLOGGER_HPP__
+#define __TEST_LOGGING_BASICLOGGER_HPP__
 
 #include <spdlog/sinks/callback_sink.h>
 #include <spdlog/spdlog.h>
@@ -7,11 +7,31 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <iostream>
 
-namespace Test::SFML3 {
+// Usage:
+//
+// #include <basic_log_controller.hpp>
+// std::unique_ptr<Test::Logging::BasicLogController> logger{
+//      std::make_unique<Test::Logging::BasicLogController>("logger", "log.txt")
+// };
 
-class Logger {
+namespace Test::Logging {
+
+//! @brief A non-synchronous log controller using SPDLog
+//
+//  Follows the Model–view–controller pattern:
+//
+// 1 Internal Model: 
+// - `spdlog::logger`
+//
+// 3 External Views: 
+// - `spdlog::sinks::stdout_color_sink_mt` 
+// - `spdlog::sinks::basic_file_sink_mt`
+// - `spdlog::sinks::callback_sink_mt`
+// 
+class BasicLogController {
 public:
-    Logger()
+    BasicLogController(std::string log_name, std::string log_path)
+    :   m_log_name(log_name), m_log_path(log_path)
     {
         m_console_sink->set_level(spdlog::level::trace);
         m_console_sink->set_pattern("[" + m_log_name + "] [%^%l%$] %v");
@@ -23,8 +43,8 @@ public:
         spdlog::flush_on(spdlog::level::trace); 
     }
 private:
-    std::string m_log_path{ "logs/log.txt" };
-    std::string m_log_name{ "sprite_test" };
+    std::string m_log_name{};
+    std::string m_log_path{};
 
     // sink for logging to stdout
     std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> m_console_sink {
@@ -55,6 +75,6 @@ private:
     };
 };
 
-} // namespace Test::SFML3
+} // namespace Test::Logging
 
-#endif // __TEST_SFML3_LOGGER_HPP__
+#endif // __TEST_LOGGING_BASICLOGGER_HPP__

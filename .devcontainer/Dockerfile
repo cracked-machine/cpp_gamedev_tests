@@ -8,8 +8,9 @@ RUN apt update -y && apt install -y \
     sudo\
     locales \
     gcc-mingw-w64-x86-64 \
-    g++-mingw-w64-x86-64
-
+    g++-mingw-w64-x86-64 \
+    gdb-mingw-w64
+    
 # SDL3 reqs
 RUN apt update -y && apt install -y \
     git \

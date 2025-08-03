@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>    
 // #include <logger.hpp>
+#include <SFML/Graphics/Color.hpp>
 #include <async_log_controller.hpp>
 #include <filesystem>
 #include <memory>
@@ -20,7 +21,7 @@ int main()
     auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
     window.setFramerateLimit(144);
     
-    std::filesystem::path imagePath{"resources\\background.jpg"};
+    std::filesystem::path imagePath{"resources\\sfml_logo.png"};
     sf::Texture texture;
     try { texture = sf::Texture(imagePath); }
     catch(const std::exception& e) { 
@@ -39,7 +40,7 @@ int main()
             }
         }
 
-        window.clear();
+        window.clear(sf::Color::Blue);
         window.draw(sprite);
         spdlog::info("draw");
         window.display();

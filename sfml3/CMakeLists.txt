@@ -38,10 +38,17 @@ file(COPY ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/event_handling/resources DE
 add_subdirectory( ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/keyboard )
 file(COPY ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/keyboard/resources DESTINATION ${CMAKE_BINARY_DIR}/bin )
 
+add_subdirectory( ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/shader )
+file(COPY ${FETCHCONTENT_BASE_DIR}/sfml-src/examples/shader/resources DESTINATION ${CMAKE_BINARY_DIR}/bin )
     
 add_subdirectory( ${CMAKE_SOURCE_DIR}/src/sprite_test )
 
 add_subdirectory( ${CMAKE_SOURCE_DIR}/src/vertexarray_test )
+add_subdirectory( ${CMAKE_SOURCE_DIR}/src/tilemap_test )
+add_subdirectory( ${CMAKE_SOURCE_DIR}/src/particle_test )
+add_subdirectory( ${CMAKE_SOURCE_DIR}/src/celestial_bodies )
+
+
 
 # runtime deps for mingw
 file(   COPY        /usr/lib/gcc/x86_64-w64-mingw32/14-win32/libstdc++-6.dll build/bin/libstdc++-6.dll
